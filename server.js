@@ -34,6 +34,7 @@ function passwordProtected(req, res, next) {
 app.use(passwordProtected)
 
 app.get('/', function(req, res) {
+    console.log(req);
     db.collection('items').find().toArray(function(err, items) {
 
     res.send(`<!DOCTYPE html>
@@ -47,7 +48,7 @@ app.get('/', function(req, res) {
     <body>
       <div class="container">
         <h1 class="display-4 text-center py-1">To-Do App</h1>
-        
+
         <div class="jumbotron p-3 shadow-sm">
           <form id = "create-form" action="create-item" method="POST">
             <div class="d-flex align-items-center">
@@ -56,11 +57,11 @@ app.get('/', function(req, res) {
             </div>
           </form>
         </div>
-        
+
         <ul id= "item-list" class="list-group pb-5">
-         
+
         </ul>
-        
+
       </div>
 
       <script>
@@ -77,7 +78,7 @@ app.get('/', function(req, res) {
 app.post("/create-item", function(req, res) {
   let safeText = sanitizeHTML(req.body.text, {allowedTags: [], allowedAttributes: []})
     db.collection("items").insertOne({text: safeText}, function(err, info) {
-    res.json(info.ops[0])    
+    res.json(info.ops[0])
   })
 })
 
@@ -93,4 +94,3 @@ app.post('/delete-item', function(req, res) {
     res.send("Success")
   })
 })
-  
