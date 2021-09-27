@@ -14,7 +14,7 @@
   "dependencies": {
     "express": "^4.16.4",
     "mongodb": "^3.2.6",
-    "nodemon": "^1.18.10",
+    "nodemon": "^4.0.1",
     "sanitize-html": "^1.20.0"
   }
 }
